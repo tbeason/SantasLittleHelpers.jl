@@ -1,6 +1,14 @@
 
 
-loggrowth(X,n=1,scl=100.0) = scl.*(log.(X) .- lag(log.(X),n))
+loggrowth(X,n=1; scal=100.0) = scal.*(log.(X) .- lag(log.(X),n))
+
+# function loggrowthfast(X,n=1; scal=100.0)
+#     scaledlogx = scal .* log.(X)
+#     scaledlogx_n = applyrolling(makekernel(first,-n:0),scaledlogx,missing)
+#     out = scaledlogx .- scaledlogx_n
+#     return out 
+# end
+
 
 
 function ac1(x; demean::Bool=true)
