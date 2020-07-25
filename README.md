@@ -14,6 +14,8 @@
 -->
 
 
+[![santaslittlehelper.jpg](https://upload.wikimedia.org/wikipedia/en/8/8a/SantasLittleHelper.png)](https://en.wikipedia.org/wiki/Santa%27s_Little_Helper)
+
 I factored out pieces of code that I always found myself using so that it would all live in one spot (here).
 
 This package has
