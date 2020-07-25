@@ -1,6 +1,6 @@
 module SantasLittleHelpers
 
-using Statistics, Dates
+using Statistics, Dates, LinearAlgebra
 using Missings
 using StaticKernels
 using ShiftedArrays: lag

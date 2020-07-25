@@ -14,8 +14,6 @@
 -->
 
 
-A package full of toys for me to use in my other programs.
-
 I factored out pieces of code that I always found myself using so that it would all live in one spot (here).
 
 This package has
@@ -26,4 +24,4 @@ This package has
  - Conditional correlations `downsidecor` and `upsidecor` (eventually will live in AsymmetricRisks.jl when I give it more love)
  - `loggrowth(x,n)` for computing log growth rates over different horizons
  - `simiterator` and `perioditerator` for labelling observations in simulations.
- - `yrqtrfun` and `monthtoquarter` Date helper functions
+ - `yrqtrfun` and `monthtoquarter` Date-like helper functions

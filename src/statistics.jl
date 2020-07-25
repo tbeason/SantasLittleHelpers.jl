@@ -2,7 +2,14 @@
 
 loggrowth(X,n=1,scl=100.0) = scl.*(log.(X) .- lag(log.(X),n))
 
-ac1(x) = @views cor(x[2:end],x[1:end-1])
+
+function ac1(x; demean::Bool=true)
+    T = typeof(zero(eltype(x)) / 1)
+    z::Vector{T} = demean ? x .- mean(x) : x
+    zz = dot(z, z)
+    ac = @views dot(z[2:end],z[1:end-1]) / zz
+    return ac
+end
 
 ## static kernels are terrible here for long windows, need some branching on n to happen
 function varianceratio(x::AbstractVector{T},n::Int) where {T}
