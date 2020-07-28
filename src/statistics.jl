@@ -10,12 +10,28 @@ loggrowth(X,n=1; scal=100.0) = scal.*(log.(X) .- lag(log.(X),n))
 # end
 
 
+"""
+```
+autocorrelate(x,n=1;demean=true)
+autocorrelate(f,x,n=1;demean=true)
+```
 
-function ac1(x; demean::Bool=true)
+Compute the autocorrelation of lag `n` of `x` or `f(x)`. `demean` defaults to true and takes place after `f` is applied.
+"""
+function autocorrelate(x,n::Int=1; demean::Bool=true)
     T = typeof(zero(eltype(x)) / 1)
     z::Vector{T} = demean ? x .- mean(x) : x
     zz = dot(z, z)
-    ac = @views dot(z[2:end],z[1:end-1]) / zz
+    ac = @views dot(z[1+n:end],z[1:end-n]) / zz
+    return ac
+end
+
+function autocorrelate(f::Function,x,n::Int=1;demean::Bool=true)
+    y = f.(x)
+    T = typeof(zero(eltype(y)) / 1)
+    z::Vector{T} = demean ? y .- mean(y) : y
+    zz = dot(z, z)
+    ac = @views dot(z[1+n:end],z[1:end-n]) / zz
     return ac
 end
 
@@ -36,6 +52,7 @@ function varianceratio(x::AbstractVector{T},k::Kernel,n::Int) where {T}
 end
 
 # the below are optimized versions for frequently used horizons
+# uses beyond the first will not incur the cost of kernel construction (~250ns)
 vr2(x) = varianceratio(x,makekernel(sum,-1:0),2)
 vr4(x) = varianceratio(x,makekernel(sum,-3:0),4)
 vr6(x) = varianceratio(x,makekernel(sum,-5:0),6)

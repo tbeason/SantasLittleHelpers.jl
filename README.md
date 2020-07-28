@@ -21,7 +21,7 @@ I factored out pieces of code that I always found myself using so that it would 
 This package has
  - Static rolling functions `applyrolling` and `makekernel` using StaticKernels.jl. For small window sizes, this is probably the fastest existing way to do rolling means, sums, etc.
  - Variance ratios `varianceratio`
- - First order autocorrelation `ac1` because `StatsBase.autocor` was too annoying when you only want the first one, and this is faster.
+ - Autocorrelation function `autocorrelate` because `StatsBase.autocor` was too annoying when you only want the first one, and this is faster. Plus I allow for transformations like `autocorrelate(abs,x)` if you want the autocorrelation of absolute `x`. you can replicate `StatsBase.autocor` via `autocorrelate.(Ref(x),0:L)` where `L` are your desired lags.
  - `nantomissing!` for DataFrames
  - Conditional correlations `downsidecor` and `upsidecor` (eventually will live in AsymmetricRisks.jl when I give it more love)
  - `loggrowth(x,n)` for computing log growth rates over different horizons
