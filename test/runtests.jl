@@ -7,7 +7,8 @@ using Statistics, StatsBase, Dates, DataFrames
 @testset "Simple Functions" begin
     x = rand(100)
     @test loggrowth(x)[end] ≈ 100*diff(log.(x))[end]
-    @test ac1(x) ≈ first(autocor(x,[1]))
+    @test autocorrelate(x) ≈ first(autocor(x,[1]))
+    @test autocorrelate(abs,x) ≈ first(autocor(abs.(x),[1]))
     @test logdiff(x[1:4]) ≈ log(x[4])-log(x[1])
 
     @test monthtoquarter(12) == 4
