@@ -23,7 +23,7 @@ This package has
  - Variance ratios `varianceratio`
  - Autocorrelation function `autocorrelate` because `StatsBase.autocor` was too annoying when you only want the first one, and this is faster. Plus I allow for transformations like `autocorrelate(abs,x)` if you want the autocorrelation of absolute `x`. you can replicate `StatsBase.autocor` via `autocorrelate.(Ref(x),0:L)` where `L` are your desired lags.
  - `nantomissing!` for DataFrames
- - Conditional correlations `downsidecor` and `upsidecor` (eventually will live in AsymmetricRisks.jl when I give it more love)
+ - Conditional correlations `conditionalcor(f,x,y)` spawning `downsidecor` and `upsidecor` (eventually will live in [AsymmetricRisk.jl](https://github.com/tbeason/AsymmetricRisk.jl) when I give it more love)
  - `loggrowth(x,n)` for computing log growth rates over different horizons
  - `simiterator` and `perioditerator` for labelling observations in simulations.
  - `yrqtrfun` and `monthtoquarter` Date-like helper functions

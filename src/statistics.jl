@@ -63,22 +63,28 @@ vr12(x) = varianceratio(x,makekernel(sum,-11:0),12)
 
 
 
+"""
+`conditionalcor(f,x,y)`
 
+Compute the correlation between `x` and `y` conditional on some event defined by the function `f(x,y)`. 
+The function `f` must return an object that can index into `x` and `y`.
 
-
-
-
-function downsidecor(x,y;q=0.5)
-    qxi = quantile(x,q)
-    loc = x .<= qxi
+__**Example**__
+```
+x = randn(1000)
+y = randn(1000)
+conditionalcor((xx,yy) -> xx .<= 0,x,y)
+conditionalcor((xx,yy) -> (xx .<= 0) .& (yy .<= 0),x,y)
+```
+"""
+function conditionalcor(f,x,y)
+    loc = f(x,y)
     out = @views cor(x[loc],y[loc])
     return out
 end
 
-function upsidecor(x,y;q=0.5)
-    qxi = quantile(x,q)
-    loc = x .>= qxi
-    out = @views cor(x[loc],y[loc])
-    return out
-end
+downsidecor(x,y;q=0.5) = conditionalcor((xx,yy) -> xx .<= quantile(x,q),x,y)
+
+upsidecor(x,y;q=0.5) = conditionalcor((xx,yy) -> xx .>= quantile(x,q),x,y)
+
 
