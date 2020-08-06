@@ -17,3 +17,9 @@ function nantomissing!(d::AbstractDataFrame)
 		end
 	end
 end
+
+
+
+
+showallrows(x) = show(x; allrows=true)
+showallrows(io,x) = show(io,x; allrows=true)

@@ -8,8 +8,8 @@ using DataFrames
 
 
 
-export varianceratio, vr2, vr4, vr6, vr8, vr12, autocorrelate, loggrowth
-export isnanmissing, nantomissing!
+export skew, kurt, autocorrelate, varianceratio, vr2, vr4, vr6, vr8, vr12, loggrowth
+export isnanmissing, nantomissing!, showallrows
 export applyrolling, makekernel, logdiff
 export yrqtrfun, simiterator, perioditerator, monthtoquarter
 export conditionalcor, downsidecor, upsidecor
