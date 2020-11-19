@@ -3,10 +3,8 @@ language: julia
 dist: xenial
 os:
   - linux
-  - osx
 julia:
-  - 1.4
-  - 1.5
+  - 1
   - nightly
 notifications:
   email: false
